@@ -2,7 +2,6 @@
 
 namespace Micro\Plugin\Twig\Business\Loader;
 
-use Micro\Framework\Kernel\Plugin\ApplicationPluginInterface;
 use Micro\Plugin\Twig\Plugin\TwigTemplatePluginInterface;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -20,7 +19,6 @@ class TemplateLoader implements LoaderInterface
      */
     public function load(Environment $environment, mixed $plugin): void
     {
-
         /** @var FilesystemLoader $loader */
         $loader    = $environment->getLoader();
         $namespace = $plugin->getTwigNamespace();
@@ -48,7 +46,7 @@ class TemplateLoader implements LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function supports(ApplicationPluginInterface $plugin): bool
+    public function supports(object $plugin): bool
     {
         return $plugin instanceof TwigTemplatePluginInterface;
     }

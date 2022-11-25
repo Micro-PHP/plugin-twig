@@ -3,8 +3,10 @@
 namespace Micro\Plugin\Twig;
 
 use Micro\Component\DependencyInjection\Container;
-use Micro\Framework\Kernel\Plugin\AbstractPlugin;
-use Micro\Kernel\App\AppKernelInterface;
+use Micro\Framework\Kernel\KernelInterface;
+use Micro\Framework\Kernel\Plugin\ConfigurableInterface;
+use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
+use Micro\Framework\Kernel\Plugin\PluginConfigurationTrait;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactory;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactoryInterface;
 use Micro\Plugin\Twig\Business\Loader\LoaderInterface;
@@ -18,18 +20,25 @@ use Micro\Plugin\Twig\Business\Render\TwigRendererFactoryInterface;
 /**
  * @method TwigPluginConfigurationInterface configuration()
  */
-class TwigPlugin extends AbstractPlugin
+class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
 {
-    protected ?Container $container = null;
+    use PluginConfigurationTrait;
+
+    /**
+     * @var KernelInterface
+     */
+    private readonly KernelInterface $kernel;
 
     /**
      * {@inheritDoc}
      */
     public function provideDependencies(Container $container): void
     {
-        $this->container = $container;
+        $container->register(TwigFacadeInterface::class, function (
+            KernelInterface $kernel
+        ) {
+            $this->kernel = $kernel;
 
-        $container->register(TwigFacadeInterface::class, function (Container $container) {
             return $this->createTwigFacade();
         });
     }
@@ -70,9 +79,7 @@ class TwigPlugin extends AbstractPlugin
      */
     protected function createLoaderProcessor(): LoaderProcessorInterface
     {
-        $kernel = $this->lookupKernel();
-
-        return new LoaderProcessor($kernel, $this->createLoaders());
+        return new LoaderProcessor($this->kernel, $this->createLoaders());
     }
 
     /**
@@ -84,13 +91,5 @@ class TwigPlugin extends AbstractPlugin
             new ExtensionLoader(),
             new TemplateLoader(),
         ];
-    }
-
-    /**
-     * @return AppKernelInterface
-     */
-    protected function lookupKernel(): AppKernelInterface
-    {
-        return $this->container->get(AppKernelInterface::class);
     }
 }

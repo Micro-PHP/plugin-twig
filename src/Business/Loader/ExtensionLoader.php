@@ -2,19 +2,15 @@
 
 namespace Micro\Plugin\Twig\Business\Loader;
 
-use Micro\Framework\Kernel\Plugin\ApplicationPluginInterface;
 use Micro\Plugin\Twig\Plugin\TwigExtensionPluginInterface;
 use Twig\Environment;
 
 class ExtensionLoader implements LoaderInterface
 {
     /**
-     * @param Environment $environment
-     * @param TwigExtensionPluginInterface $plugin
-     *
-     * @return void
+     * {@inheritDoc}
      */
-    public function load(Environment $environment, mixed $plugin): void
+    public function load(Environment $environment, TwigExtensionPluginInterface $plugin): void
     {
         $this->provideExtensions($environment, $plugin);
     }
@@ -35,7 +31,7 @@ class ExtensionLoader implements LoaderInterface
     /**
      * {@inheritDoc}
      */
-    public function supports(ApplicationPluginInterface $plugin): bool
+    public function supports(object $plugin): bool
     {
         return $plugin instanceof TwigExtensionPluginInterface;
     }

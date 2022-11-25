@@ -10,7 +10,7 @@ class TwigRenderer implements TwigRendererInterface
      * @param EnvironmentFactoryInterface $environmentFactory
      */
     public function __construct(
-    private EnvironmentFactoryInterface $environmentFactory
+        private readonly EnvironmentFactoryInterface $environmentFactory
     )
     {
     }
