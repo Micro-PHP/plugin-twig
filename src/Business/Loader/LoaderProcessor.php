@@ -3,8 +3,6 @@
 namespace Micro\Plugin\Twig\Business\Loader;
 
 use Micro\Framework\Kernel\KernelInterface;
-use Micro\Framework\Kernel\Plugin\ApplicationPluginInterface;
-use Micro\Plugin\Twig\Plugin\TwigExtensionPluginInterface;
 use Twig\Environment;
 
 class LoaderProcessor implements LoaderProcessorInterface
@@ -14,8 +12,8 @@ class LoaderProcessor implements LoaderProcessorInterface
      * @param LoaderInterface[] $loaders
      */
     public function __construct(
-    private KernelInterface $appKernel,
-    private iterable $loaders
+        private readonly KernelInterface $appKernel,
+        private readonly iterable $loaders
     )
     {
     }
@@ -32,10 +30,10 @@ class LoaderProcessor implements LoaderProcessorInterface
 
     /**
      * @param Environment $environment
-     * @param ApplicationPluginInterface $plugin
+     * @param object $plugin
      * @return void
      */
-    protected function process(Environment $environment, ApplicationPluginInterface $plugin): void
+    protected function process(Environment $environment, object $plugin): void
     {
         foreach ($this->loaders as $loader) {
             if(!$loader->supports($plugin)) {

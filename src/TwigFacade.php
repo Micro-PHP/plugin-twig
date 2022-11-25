@@ -9,7 +9,7 @@ class TwigFacade implements TwigFacadeInterface
     /**
      * @param TwigRendererFactoryInterface $twigRendererFactory
      */
-    public function __construct(private TwigRendererFactoryInterface $twigRendererFactory)
+    public function __construct(private readonly TwigRendererFactoryInterface $twigRendererFactory)
     {
     }
 

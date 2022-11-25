@@ -13,7 +13,7 @@ interface TwigFacadeInterface
      * @param array $arguments
      *
      * @return string
-     *@throws RuntimeError
+     * @throws RuntimeError
      * @throws SyntaxError
      *
      * @throws LoaderError
