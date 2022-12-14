@@ -2,7 +2,7 @@
     "name": "micro/plugin-twig",
     "description": "Micro Framework: Twig provider plugin",
     "type": "library",
-    "version": "0.9",
+    "version": "1.0",
     "require": {
         "twig/twig": "^3",
         "micro/kernel-app": "^1"
