@@ -10,27 +10,29 @@ use Twig\Loader\FilesystemLoader;
 class TemplateLoader implements LoaderInterface
 {
     /**
-     * @param Environment $environment
-     * @param TwigTemplatePluginInterface $plugin
-     *
-     * @return void
-     *
      * @throws LoaderError
      */
-    public function load(Environment $environment, mixed $plugin): void
+    public function load(Environment $environment, object $plugin): void
     {
-        /** @var FilesystemLoader $loader */
-        $loader    = $environment->getLoader();
+        $loader = $environment->getLoader();
+        if (!$loader instanceof FilesystemLoader) {
+            throw new \InvalidArgumentException(sprintf('The loader must be an instance of %s', FilesystemLoader::MAIN_NAMESPACE));
+        }
+
+        if (!$plugin instanceof TwigTemplatePluginInterface) {
+            @trigger_error(sprintf('The plugin must be an instance of %s', TwigTemplatePluginInterface::class));
+
+            return;
+        }
+
         $namespace = $plugin->getTwigNamespace();
-        $paths     = $plugin->getTwigTemplatePaths();
+        $paths = $plugin->getTwigTemplatePaths();
 
         $this->registerTemplates($loader, $paths, $namespace);
     }
 
     /**
-     * @param FilesystemLoader $loader
-     * @param array $paths
-     * @param string|null $namespace
+     * @param array<string> $paths
      *
      * @return void
      *
@@ -39,12 +41,16 @@ class TemplateLoader implements LoaderInterface
     protected function registerTemplates(FilesystemLoader $loader, array $paths, string $namespace = null)
     {
         foreach ($paths as $path) {
-            $loader->addPath($path, $namespace);
+            $args = [$path];
+            if (null !== $namespace) {
+                $args[] = $namespace;
+            }
+            $loader->addPath(...$args);
         }
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports(object $plugin): bool
     {

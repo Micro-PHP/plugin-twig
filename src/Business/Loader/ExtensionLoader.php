@@ -8,19 +8,19 @@ use Twig\Environment;
 class ExtensionLoader implements LoaderInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function load(Environment $environment, TwigExtensionPluginInterface $plugin): void
+    public function load(Environment $environment, object $plugin): void
     {
+        if (!$plugin instanceof TwigExtensionPluginInterface) {
+            @trigger_error(sprintf('The plugin must be an instance of %s', TwigExtensionPluginInterface::class));
+
+            return;
+        }
+
         $this->provideExtensions($environment, $plugin);
     }
 
-    /**
-     * @param Environment $environment
-     * @param TwigExtensionPluginInterface $extensionProvider
-     *
-     * @return void
-     */
     protected function provideExtensions(Environment $environment, TwigExtensionPluginInterface $extensionProvider): void
     {
         foreach ($extensionProvider->provideTwigExtensions() as $extension) {
@@ -29,7 +29,7 @@ class ExtensionLoader implements LoaderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports(object $plugin): bool
     {

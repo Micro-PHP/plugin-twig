@@ -8,18 +8,16 @@ use Twig\Environment;
 class LoaderProcessor implements LoaderProcessorInterface
 {
     /**
-     * @param KernelInterface $appKernel
      * @param LoaderInterface[] $loaders
      */
     public function __construct(
         private readonly KernelInterface $appKernel,
         private readonly iterable $loaders
-    )
-    {
+    ) {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(Environment $environment): void
     {
@@ -28,15 +26,10 @@ class LoaderProcessor implements LoaderProcessorInterface
         }
     }
 
-    /**
-     * @param Environment $environment
-     * @param object $plugin
-     * @return void
-     */
     protected function process(Environment $environment, object $plugin): void
     {
         foreach ($this->loaders as $loader) {
-            if(!$loader->supports($plugin)) {
+            if (!$loader->supports($plugin)) {
                 continue;
             }
 

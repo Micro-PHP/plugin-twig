@@ -3,16 +3,12 @@
 namespace Micro\Plugin\Twig\Business\Loader;
 
 use Twig\Environment;
-use Twig\Error\Error;
+use Twig\Error\Error as TwigError;
 
 interface LoaderProcessorInterface
 {
     /**
-     * @param Environment $environment
-     *
-     * @throws Error
-     *
-     * @return void
+     * @throws TwigError
      */
     public function load(Environment $environment): void;
 }

@@ -6,17 +6,13 @@ use Micro\Plugin\Twig\Business\Environment\EnvironmentFactoryInterface;
 
 class TwigRenderer implements TwigRendererInterface
 {
-    /**
-     * @param EnvironmentFactoryInterface $environmentFactory
-     */
     public function __construct(
         private readonly EnvironmentFactoryInterface $environmentFactory
-    )
-    {
+    ) {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function render(string $template, array $arguments): string
     {
