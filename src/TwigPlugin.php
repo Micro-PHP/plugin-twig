@@ -9,43 +9,41 @@ use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
 use Micro\Framework\Kernel\Plugin\PluginConfigurationTrait;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactory;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactoryInterface;
+use Micro\Plugin\Twig\Business\Loader\ExtensionLoader;
 use Micro\Plugin\Twig\Business\Loader\LoaderInterface;
 use Micro\Plugin\Twig\Business\Loader\LoaderProcessor;
 use Micro\Plugin\Twig\Business\Loader\LoaderProcessorInterface;
-use Micro\Plugin\Twig\Business\Loader\ExtensionLoader;
 use Micro\Plugin\Twig\Business\Loader\TemplateLoader;
 use Micro\Plugin\Twig\Business\Render\TwigRendererFactory;
 use Micro\Plugin\Twig\Business\Render\TwigRendererFactoryInterface;
 
 /**
+ * @psalm-suppress ImplementedReturnTypeMismatch
+ * @psalm-suppress MissingConstructor
+ *
  * @method TwigPluginConfigurationInterface configuration()
  */
 class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
 {
     use PluginConfigurationTrait;
 
-    /**
-     * @var KernelInterface
-     */
     private readonly KernelInterface $kernel;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function provideDependencies(Container $container): void
     {
         $container->register(TwigFacadeInterface::class, function (
             KernelInterface $kernel
         ) {
+            /** @psalm-suppress InaccessibleProperty */
             $this->kernel = $kernel;
 
             return $this->createTwigFacade();
         });
     }
 
-    /**
-     * @return TwigFacadeInterface
-     */
     protected function createTwigFacade(): TwigFacadeInterface
     {
         return new TwigFacade(
@@ -53,9 +51,6 @@ class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
         );
     }
 
-    /**
-     * @return TwigRendererFactoryInterface
-     */
     protected function createTwigRendererFactory(): TwigRendererFactoryInterface
     {
         return new TwigRendererFactory(
@@ -63,9 +58,6 @@ class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
         );
     }
 
-    /**
-     * @return EnvironmentFactoryInterface
-     */
     protected function createEnvironmentFactory(): EnvironmentFactoryInterface
     {
         return new EnvironmentFactory(
@@ -74,9 +66,6 @@ class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
         );
     }
 
-    /**
-     * @return LoaderProcessorInterface
-     */
     protected function createLoaderProcessor(): LoaderProcessorInterface
     {
         return new LoaderProcessor($this->kernel, $this->createLoaders());

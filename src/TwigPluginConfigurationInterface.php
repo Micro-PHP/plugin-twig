@@ -4,13 +4,12 @@ namespace Micro\Plugin\Twig;
 
 interface TwigPluginConfigurationInterface
 {
-
-    public const IS_DEBUG_DEFAULT            = false;
-    public const CHARSET_DEFAULT             = 'utf-8';
-    public const CACHE_DEFAULT               = null;
-    public const IS_AUTO_RELOAD_DEFAULT      = false;
+    public const IS_DEBUG_DEFAULT = false;
+    public const CHARSET_DEFAULT = 'utf-8';
+    public const CACHE_DEFAULT = null;
+    public const IS_AUTO_RELOAD_DEFAULT = false;
     public const IS_STRICT_VARIABLES_DEFAULT = false;
-    public const OPTIMIZATIONS_DEFAULT       = -1;
+    public const OPTIMIZATIONS_DEFAULT = -1;
 
     /**
      * @return array<string,  bool|int|string>
@@ -19,30 +18,22 @@ interface TwigPluginConfigurationInterface
 
     /**
      * When set to true, the generated templates have a __toString() method that you can use to display the generated nodes (default to false).
-     *
-     * @return bool
      */
     public function isDebug(): bool;
 
     /**
      * The charset used by the templates.
-     *
-     * @return string
      */
     public function getCharset(): string;
 
     /**
-     * An absolute path where to store the compiled templates, or null to disable caching (which is the default)
-     *
-     * @return string|null
+     * An absolute path where to store the compiled templates, or null to disable caching (which is the default).
      */
     public function getCachePath(): ?string;
 
     /**
      * When developing with Twig, it's useful to recompile the template whenever the source code changes.
      * If you don't provide a value for the auto_reload option, it will be determined automatically based on the debug value.
-     *
-     * @return bool
      */
     public function isAutoReload(): bool;
 
@@ -51,8 +42,6 @@ interface TwigPluginConfigurationInterface
      *      (variables and or attributes/methods that do not exist) and replace them with a null value.
      *
      * When set to true, Twig throws an exception instead (default to false).
-     *
-     * @return bool
      */
     public function isStrictVariables(): bool;
 
@@ -70,8 +59,6 @@ interface TwigPluginConfigurationInterface
 
     /**
      * A flag that indicates which optimizations to apply (default to -1 -- all optimizations are enabled; set it to 0 to disable).
-     *
-     * @return int
      */
     public function getOptimizations(): int;
 }

@@ -2,26 +2,16 @@
 
 namespace Micro\Plugin\Twig\Business\Loader;
 
-use Micro\Plugin\Twig\Plugin\TwigExtensionPluginInterface;
 use Twig\Environment;
-use Twig\Error\Error;
+use Twig\Error\Error as TwigError;
 
 interface LoaderInterface
 {
     /**
-     * @param Environment $environment
-     * @param object $plugin
-     *
-     * @throws Error
-     *
-     * @return void
+     * @throws TwigError
+     * @throws \InvalidArgumentException
      */
-    public function load(Environment $environment, TwigExtensionPluginInterface $plugin): void;
+    public function load(Environment $environment, object $plugin): void;
 
-    /**
-     * @param object $plugin
-     *
-     * @return bool
-     */
     public function supports(object $plugin): bool;
 }

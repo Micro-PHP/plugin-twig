@@ -6,8 +6,5 @@ use Twig\Environment;
 
 interface EnvironmentFactoryInterface
 {
-    /**
-     * @return Environment
-     */
     public function create(): Environment;
 }

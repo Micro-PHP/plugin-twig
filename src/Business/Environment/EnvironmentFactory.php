@@ -10,33 +10,22 @@ use Twig\Loader\LoaderInterface;
 
 class EnvironmentFactory implements EnvironmentFactoryInterface
 {
-    /**
-     * @param TwigPluginConfigurationInterface $pluginConfiguration
-     * @param LoaderProcessorInterface $environmentLoaderProcessor
-     */
     public function __construct(
     private TwigPluginConfigurationInterface $pluginConfiguration,
     private LoaderProcessorInterface $environmentLoaderProcessor
-    )
-    {
+    ) {
     }
 
-    /**
-     * @return Environment
-     */
     public function create(): Environment
     {
-        $twig = $this->createEnvitonment();
+        $twig = $this->createEnvironment();
 
         $this->environmentLoaderProcessor->load($twig);
 
         return $twig;
     }
 
-    /**
-     * @return Environment
-     */
-    protected function createEnvitonment(): Environment
+    protected function createEnvironment(): Environment
     {
         return new Environment(
             $this->createLoader(),
@@ -44,16 +33,13 @@ class EnvironmentFactory implements EnvironmentFactoryInterface
         );
     }
 
-    /**
-     * @return LoaderInterface
-     */
     protected function createLoader(): LoaderInterface
     {
         return new FilesystemLoader();
     }
 
     /**
-     * @return array
+     * @return array<string, bool|int|string>
      */
     protected function createEnvironmentConfigurationArray(): array
     {

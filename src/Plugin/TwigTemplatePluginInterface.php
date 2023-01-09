@@ -9,13 +9,7 @@ interface TwigTemplatePluginInterface
      */
     public function getTwigTemplatePaths(): array;
 
-    /**
-     * @return string|null
-     */
     public function getTwigNamespace(): ?string;
 
-    /**
-     * @return bool
-     */
     public function isTwigTemplatesPrepend(): bool;
 }

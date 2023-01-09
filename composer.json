@@ -1,22 +1,49 @@
 {
     "name": "micro/plugin-twig",
     "description": "Micro Framework: Twig provider plugin",
-    "type": "library",
-    "version": "1.0",
-    "require": {
-        "twig/twig": "^3",
-        "micro/kernel-app": "^1"
-    },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Micro\\Plugin\\Twig\\": "src/"
-        }
-    },
+    "type": "library",
     "authors": [
         {
             "name": "Stanislau.Komar",
             "email": "stanislau_komar@epam.com"
         }
-    ]
+    ],
+    "require": {
+        "micro/kernel-app": "^1",
+        "twig/twig": "^3"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.29",
+        "friendsofphp/php-cs-fixer": "^3.13",
+        "phpstan/phpstan": "^1.9",
+        "vimeo/psalm": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Micro\\Plugin\\Twig\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "php-cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix --verbose --using-cache=no",
+        "php-cs-try": "PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix --verbose --dry-run --using-cache=no",
+        "phpstan": "./vendor/bin/phpstan analyze --no-progress",
+        "psalm": "./vendor/bin/psalm --no-progress --show-info=true",
+        "statics": [
+            "@phpstan",
+            "@psalm",
+            "@php-cs-try"
+        ],
+        "test": [
+            "composer validate --strict",
+            "composer normalize",
+            "@statics"
+        ]
+    }
 }
