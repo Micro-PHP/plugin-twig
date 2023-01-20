@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Static tests
-        run: composer statics --strict
+        run: composer run statics
