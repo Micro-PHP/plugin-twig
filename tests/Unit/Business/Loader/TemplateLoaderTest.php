@@ -18,31 +18,51 @@ use Micro\Plugin\Twig\Plugin\TwigTemplatePluginInterface;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\Loader\LoaderInterface;
 
 class TemplateLoaderTest extends TestCase
 {
-    public function testLoad()
+    /**
+     * @param class-string $loaderMock
+     *
+     * @dataProvider dataProvider
+     */
+    public function testLoad(string $loaderMock, string|null $exception): void
     {
+        if ($exception) {
+            $this->expectException($exception);
+        }
+
         $templateLoader = new TemplateLoader();
         $templatePath = [
             '/a',
         ];
         $fakePlugin = new \stdClass();
         $plugin = $this->createMock(TwigTemplatePluginInterface::class);
-        $plugin->expects($this->once())->method('getTwigNamespace')->willReturn(null);
-        $plugin->expects($this->once())->method('getTwigTemplatePaths')->willReturn($templatePath);
+        $loader = $this->createMock($loaderMock);
 
-        $loader = $this->createMock(FilesystemLoader::class);
+        if (FilesystemLoader::class === $loaderMock) {
+            $loader
+                ->expects($this->once())
+                ->method('addPath')
+                ->with($templatePath[0], FilesystemLoader::MAIN_NAMESPACE);
 
-        $loader
-            ->expects($this->once())
-            ->method('addPath')
-            ->with($templatePath[0], FilesystemLoader::MAIN_NAMESPACE);
+            $plugin->expects($this->once())->method('getTwigNamespace')->willReturn(null);
+            $plugin->expects($this->once())->method('getTwigTemplatePaths')->willReturn($templatePath);
+        }
 
         $twigEnv = $this->createMock(Environment::class);
         $twigEnv->expects($this->once())->method('getLoader')->willReturn($loader);
 
         $templateLoader->load($twigEnv, $fakePlugin);
         $templateLoader->load($twigEnv, $plugin);
+    }
+
+    public function dataProvider(): array
+    {
+        return [
+            [FilesystemLoader::class, null],
+            [LoaderInterface::class, \InvalidArgumentException::class],
+        ];
     }
 }

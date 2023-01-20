@@ -27,19 +27,12 @@ class TemplateLoader implements LoaderInterface
             return;
         }
 
-        $loader = $environment->getLoader();
-        if (!$loader instanceof FilesystemLoader) {
-            throw new \InvalidArgumentException(sprintf('The loader must be an instance of %s', FilesystemLoader::MAIN_NAMESPACE));
-        }
-
-        if (!$plugin instanceof TwigTemplatePluginInterface) {
-            @trigger_error(sprintf('The plugin must be an instance of %s', TwigTemplatePluginInterface::class));
-
-            return;
-        }
-
         /** @var FilesystemLoader $loader */
         $loader = $environment->getLoader();
+        if (!($loader instanceof FilesystemLoader)) {
+            throw new \InvalidArgumentException(sprintf('The loader supports only %s', FilesystemLoader::class));
+        }
+
         $namespace = $plugin->getTwigNamespace();
         $paths = $plugin->getTwigTemplatePaths();
 
