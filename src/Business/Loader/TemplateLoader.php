@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *  This file is part of the Micro framework package.
+ *
+ *  (c) Stanislau Komar <kost@micro-php.net>
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace Micro\Plugin\Twig\Business\Loader;
 
 use Micro\Plugin\Twig\Plugin\TwigTemplatePluginInterface;
@@ -14,6 +23,10 @@ class TemplateLoader implements LoaderInterface
      */
     public function load(Environment $environment, object $plugin): void
     {
+        if (!($plugin instanceof TwigTemplatePluginInterface)) {
+            return;
+        }
+
         $loader = $environment->getLoader();
         if (!$loader instanceof FilesystemLoader) {
             throw new \InvalidArgumentException(sprintf('The loader must be an instance of %s', FilesystemLoader::MAIN_NAMESPACE));
@@ -25,6 +38,8 @@ class TemplateLoader implements LoaderInterface
             return;
         }
 
+        /** @var FilesystemLoader $loader */
+        $loader = $environment->getLoader();
         $namespace = $plugin->getTwigNamespace();
         $paths = $plugin->getTwigTemplatePaths();
 
@@ -32,28 +47,18 @@ class TemplateLoader implements LoaderInterface
     }
 
     /**
-     * @param array<string> $paths
-     *
-     * @return void
+     * @param string[] $paths
      *
      * @throws LoaderError
      */
-    protected function registerTemplates(FilesystemLoader $loader, array $paths, string $namespace = null)
+    protected function registerTemplates(FilesystemLoader $loader, array $paths, string $namespace = null): void
     {
-        foreach ($paths as $path) {
-            $args = [$path];
-            if (null !== $namespace) {
-                $args[] = $namespace;
-            }
-            $loader->addPath(...$args);
+        if (null === $namespace) {
+            $namespace = FilesystemLoader::MAIN_NAMESPACE;
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supports(object $plugin): bool
-    {
-        return $plugin instanceof TwigTemplatePluginInterface;
+        foreach ($paths as $path) {
+            $loader->addPath($path, $namespace);
+        }
     }
 }
