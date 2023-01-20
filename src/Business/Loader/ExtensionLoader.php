@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *  This file is part of the Micro framework package.
+ *
+ *  (c) Stanislau Komar <kost@micro-php.net>
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace Micro\Plugin\Twig\Business\Loader;
 
 use Micro\Plugin\Twig\Plugin\TwigExtensionPluginInterface;
@@ -8,13 +17,11 @@ use Twig\Environment;
 class ExtensionLoader implements LoaderInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(Environment $environment, object $plugin): void
     {
         if (!$plugin instanceof TwigExtensionPluginInterface) {
-            @trigger_error(sprintf('The plugin must be an instance of %s', TwigExtensionPluginInterface::class));
-
             return;
         }
 
@@ -26,13 +33,5 @@ class ExtensionLoader implements LoaderInterface
         foreach ($extensionProvider->provideTwigExtensions() as $extension) {
             $environment->addExtension($extension);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports(object $plugin): bool
-    {
-        return $plugin instanceof TwigExtensionPluginInterface;
     }
 }

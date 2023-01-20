@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *  This file is part of the Micro framework package.
+ *
+ *  (c) Stanislau Komar <kost@micro-php.net>
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
 namespace Micro\Plugin\Twig;
 
 use Micro\Component\DependencyInjection\Container;
@@ -18,26 +27,22 @@ use Micro\Plugin\Twig\Business\Render\TwigRendererFactory;
 use Micro\Plugin\Twig\Business\Render\TwigRendererFactoryInterface;
 
 /**
- * @psalm-suppress ImplementedReturnTypeMismatch
- * @psalm-suppress MissingConstructor
- *
  * @method TwigPluginConfigurationInterface configuration()
  */
 class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
 {
     use PluginConfigurationTrait;
 
-    private readonly KernelInterface $kernel;
+    private KernelInterface $kernel;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function provideDependencies(Container $container): void
     {
         $container->register(TwigFacadeInterface::class, function (
             KernelInterface $kernel
         ) {
-            /** @psalm-suppress InaccessibleProperty */
             $this->kernel = $kernel;
 
             return $this->createTwigFacade();
