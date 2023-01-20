@@ -45,4 +45,4 @@ jobs:
           composer-options: "--prefer-dist --no-progress"
 
       - name: Run tests
-        run: composer run test
+        run: composer test
