@@ -22,10 +22,10 @@ class TwigFacade implements TwigFacadeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(string $template, array $arguments = []): string
+    public function render(string $templateName, array $arguments = []): string
     {
         return $this->twigRendererFactory
             ->create()
-            ->render($template, $arguments);
+            ->render($templateName, $arguments);
     }
 }
