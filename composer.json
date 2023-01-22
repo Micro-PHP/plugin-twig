@@ -11,9 +11,9 @@
     ],
     "require": {
         "micro/kernel": "^1.6",
-        "micro/kernel-boot-configuration": "^1",
-        "micro/kernel-boot-dependency": "^1",
-        "micro/kernel-boot-plugin-depended": "^1",
+        "micro/kernel-boot-configuration": "^1.6",
+        "micro/kernel-boot-dependency": "^1.6",
+        "micro/kernel-boot-plugin-depended": "^1.6",
         "twig/twig": "^3"
     },
     "require-dev": {

@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class TwigRendererTest extends TestCase
 {
-    public function testRender()
+    public function testRender(): void
     {
         $factory = $this->createMock(EnvironmentFactoryInterface::class);
         $renderer = new TwigRenderer($factory);
