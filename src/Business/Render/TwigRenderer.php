@@ -23,11 +23,11 @@ class TwigRenderer implements TwigRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(string $template, array $arguments): string
+    public function render(string $templateName, array $arguments): string
     {
         return $this->environmentFactory
             ->create()
-            ->load($template)
+            ->load($templateName)
             ->render($arguments);
     }
 }

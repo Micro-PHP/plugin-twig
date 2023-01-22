@@ -11,18 +11,8 @@
 
 namespace Micro\Plugin\Twig;
 
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use Micro\Plugin\Twig\Business\Render\TwigRendererInterface;
 
-interface TwigFacadeInterface
+interface TwigFacadeInterface extends TwigRendererInterface
 {
-    /**
-     * @param array<string, mixed> $arguments
-     *
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws LoaderError
-     */
-    public function render(string $templateName, array $arguments = []): string;
 }
