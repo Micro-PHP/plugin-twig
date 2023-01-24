@@ -19,6 +19,4 @@ interface TwigTemplatePluginInterface
     public function getTwigTemplatePaths(): array;
 
     public function getTwigNamespace(): ?string;
-
-    public function isTwigTemplatesPrepend(): bool;
 }
