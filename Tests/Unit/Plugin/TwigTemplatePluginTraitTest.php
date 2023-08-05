@@ -11,7 +11,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit\Plugin;
+namespace Micro\Plugin\Twig\Tests\Unit\Plugin;
 
 use Micro\Plugin\Twig\Plugin\TwigTemplatePluginInterface;
 use Micro\Plugin\Twig\Plugin\TwigTemplatePluginTrait;

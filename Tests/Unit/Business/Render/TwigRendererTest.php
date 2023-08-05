@@ -11,22 +11,20 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit\Business\Render;
+namespace Micro\Plugin\Twig\Tests\Unit\Business\Render;
 
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactoryInterface;
-use Micro\Plugin\Twig\Business\Render\TwigRendererFactory;
+use Micro\Plugin\Twig\Business\Render\TwigRenderer;
 use Micro\Plugin\Twig\Business\Render\TwigRendererInterface;
 use PHPUnit\Framework\TestCase;
 
-class TwigRendererFactoryTest extends TestCase
+class TwigRendererTest extends TestCase
 {
-    public function testCreate()
+    public function testRender(): void
     {
-        $envFactory = $this->createMock(EnvironmentFactoryInterface::class);
-        $factory = new TwigRendererFactory(
-            $envFactory,
-        );
+        $factory = $this->createMock(EnvironmentFactoryInterface::class);
+        $renderer = new TwigRenderer($factory);
 
-        $this->assertInstanceOf(TwigRendererInterface::class, $factory->create());
+        $this->assertInstanceOf(TwigRendererInterface::class, $renderer);
     }
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit\Business\Loader;
+namespace Micro\Plugin\Twig\Tests\Unit\Business\Loader;
 
 use Micro\Framework\Kernel\KernelInterface;
 use Micro\Plugin\Twig\Business\Loader\LoaderInterface;

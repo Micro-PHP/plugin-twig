@@ -11,7 +11,7 @@
 
 namespace Micro\Plugin\Twig;
 
-use Micro\Framework\Kernel\Configuration\PluginConfiguration;
+use Micro\Framework\BootConfiguration\Configuration\PluginConfiguration;
 
 class TwigPluginConfiguration extends PluginConfiguration implements TwigPluginConfigurationInterface
 {

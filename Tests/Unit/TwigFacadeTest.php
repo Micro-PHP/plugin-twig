@@ -11,7 +11,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit;
+namespace Micro\Plugin\Twig\Tests\Unit;
 
 use Micro\Plugin\Twig\Business\Render\TwigRendererFactoryInterface;
 use Micro\Plugin\Twig\Business\Render\TwigRendererInterface;

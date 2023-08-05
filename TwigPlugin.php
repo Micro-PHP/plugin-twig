@@ -11,11 +11,11 @@
 
 namespace Micro\Plugin\Twig;
 
-use Micro\Component\DependencyInjection\Container;
+use Micro\Framework\DependencyInjection\Container;
 use Micro\Framework\Kernel\KernelInterface;
-use Micro\Framework\Kernel\Plugin\ConfigurableInterface;
-use Micro\Framework\Kernel\Plugin\DependencyProviderInterface;
-use Micro\Framework\Kernel\Plugin\PluginConfigurationTrait;
+use Micro\Framework\BootConfiguration\Plugin\ConfigurableInterface;
+use Micro\Framework\BootDependency\Plugin\DependencyProviderInterface;
+use Micro\Framework\BootConfiguration\Plugin\PluginConfigurationTrait;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactory;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactoryInterface;
 use Micro\Plugin\Twig\Business\Loader\ExtensionLoader;

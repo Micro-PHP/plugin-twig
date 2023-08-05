@@ -11,11 +11,11 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit;
+namespace Micro\Plugin\Twig\Tests\Unit;
 
 use Micro\Component\DependencyInjection\Autowire\ContainerAutowire;
-use Micro\Component\DependencyInjection\Container;
-use Micro\Framework\Kernel\Configuration\ApplicationConfigurationInterface;
+use Micro\Framework\DependencyInjection\Container;
+use Micro\Framework\BootConfiguration\Configuration\ApplicationConfigurationInterface;
 use Micro\Framework\Kernel\KernelInterface;
 use Micro\Plugin\Twig\TwigFacadeInterface;
 use Micro\Plugin\Twig\TwigPlugin;

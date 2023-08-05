@@ -11,9 +11,9 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace Micro\Plugin\Twig\Test\Unit\Business\Environment;
+namespace Micro\Plugin\Twig\Tests\Unit\Business\Environment;
 
-use Micro\Framework\Kernel\Configuration\DefaultApplicationConfiguration;
+use Micro\Framework\BootConfiguration\Configuration\DefaultApplicationConfiguration;
 use Micro\Plugin\Twig\Business\Environment\EnvironmentFactory;
 use Micro\Plugin\Twig\Business\Loader\LoaderProcessorInterface;
 use Micro\Plugin\Twig\TwigPluginConfiguration;
