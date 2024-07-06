@@ -13,10 +13,11 @@ namespace Micro\Plugin\Twig;
 
 use Micro\Plugin\Twig\Business\Render\TwigRendererFactoryInterface;
 
-class TwigFacade implements TwigFacadeInterface
+readonly class TwigFacade implements TwigFacadeInterface
 {
-    public function __construct(private readonly TwigRendererFactoryInterface $twigRendererFactory)
-    {
+    public function __construct(
+        private TwigRendererFactoryInterface $twigRendererFactory
+    ) {
     }
 
     /**
