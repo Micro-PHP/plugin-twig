@@ -16,18 +16,13 @@
         "micro/kernel-boot-plugin-depended": "^2.0",
         "twig/twig": "^3"
     },
-    "require-dev": {
-        "ergebnis/composer-normalize": "^2.34"
-    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Micro\\Plugin\\Twig\\": "/"
         }
     },
     "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        }
-    },
-    "minimum-stability": "dev"
+        "sort-packages": true
+    }
 }

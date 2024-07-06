@@ -35,9 +35,6 @@ class TwigPlugin implements DependencyProviderInterface, ConfigurableInterface
 
     private KernelInterface $kernel;
 
-    /**
-     * {@inheritDoc}
-     */
     public function provideDependencies(Container $container): void
     {
         $container->register(TwigFacadeInterface::class, function (
